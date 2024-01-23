@@ -1,12 +1,40 @@
 {
-    "user": [
+    "users": [
         {
             "port": 1001,
-            "name": "Eric"
+            "name": "EricDotson"
         },
         {
             "port": 1002,
             "name": "Nate"
+        },
+        {
+            "port": 1003,
+            "name": "Evan"
+        },
+        {
+            "port": 1004,
+            "name": "Fatinah"
+        },
+        {
+            "port": 1005,
+            "name": "Josh"
+        },
+        {
+            "port": 1006,
+            "name": "Karl"
+        },
+        {
+            "port": 1007,
+            "name": "Regan"
+        },
+        {
+            "port": 1008,
+            "name": "Ryan"
+        },
+        {
+            "port": 1009,
+            "name": "Tom"
         }
     ]
 }

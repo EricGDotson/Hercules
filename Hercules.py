@@ -1,19 +1,29 @@
 # Opening config Java Script Object Notation (json) file
 import json
-import socket
+import os
 import time
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # TODO: put config in gitignore
 
-host = "192.168.10.121"
-port = 1002
+host = "10.30.25.114"
+# port = 1001
 date = time.strftime("%m/%d/%Y")
-
+global port
+global name
 try:
     with open("config.json", "r") as f:
         data = json.load(f)
-        print(data)
+        pw = os.getcwd()
+        pw = pw.split("\\")
+        pw = pw.split('.')
+        print(pw[2])
+
+    for user in data["users"]:
+        if pw[2] == data["users"][0]["name"]:
+            port = data["users"][0]["port"]
+            name = pw.split('.')
+
 except FileNotFoundError:
     print("Error: File not found.")
     exit()
@@ -33,7 +43,7 @@ class HTTPResponse(BaseHTTPRequestHandler):
         self.end_headers()
 
         self.wfile.write(
-            bytes("HELLO name, today is ".encode() + date.encode()))
+            bytes(f"HELLO {name}, today is ".encode() + date.encode()))
 
 
 Server = HTTPServer((host, port), HTTPResponse)
