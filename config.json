@@ -1,40 +1,45 @@
 {
-    "users": [
-        {
-            "port": 1001,
-            "name": "EricDotson"
+    "192.168.10.100": {
+        "eric.dotson": {
+            "port": 10001
         },
-        {
-            "port": 1002,
-            "name": "Nate"
+        "nate.klauer": {
+            "port": 10002
         },
-        {
-            "port": 1003,
-            "name": "Evan"
+        "evan.graves": {
+            "port": 10003
         },
-        {
-            "port": 1004,
-            "name": "Fatinah"
+        "fatinah.muhammad": {
+            "port": 10004
         },
-        {
-            "port": 1005,
-            "name": "Josh"
+        "josh.taylor": {
+            "port": 10005
         },
-        {
-            "port": 1006,
-            "name": "Karl"
+        "karl.zipser": {
+            "port": 10006
         },
-        {
-            "port": 1007,
-            "name": "Regan"
+        "regan.willis": {
+            "port": 10007
         },
-        {
-            "port": 1008,
-            "name": "Ryan"
+        "ryan.jeon": {
+            "port": 10008
         },
-        {
-            "port": 1009,
-            "name": "Tom"
+        "tom.wise": {
+            "port": 10009
+        },
+        "*": {
+            "port": 10010
         }
-    ]
+    },
+    "192.168.10.70": {
+        "eric.dotson": {
+            "port": 10001
+        },
+        "ccarl.johnson": {
+            "port": 10002
+        }
+    },
+    "*": {
+        "port": 20002
+    }
 }

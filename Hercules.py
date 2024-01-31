@@ -1,40 +1,63 @@
-# Opening config Java Script Object Notation (json) file
-import json
 import os
+import json
 import time
+import socket
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-# TODO: put config in gitignore
+# TODO:
+# put config in gitignore
+# grabbing ip from vpn and not joan
 
-host = "10.30.25.114"
-# port = 1001
 date = time.strftime("%m/%d/%Y")
-global port
-global name
+
+# To grab local ip address
+
+
+def get_local_ip():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        # doesn't even have to be reachable
+        s.connect(('192.255.255.255', 1))
+        IP = s.getsockname()[0]
+    except:
+        IP = '127.0.0.1'
+    finally:
+        s.close()
+    return IP
+
+
+local_ip = get_local_ip()
+
+
 try:
     with open("config.json", "r") as f:
         data = json.load(f)
-        pw = os.getcwd()
-        pw = pw.split("\\")
-        pw = pw.split('.')
-        print(pw[2])
+        # pw = os.getcwd()
+        pw = ['C:', 'Users', 'ccarl.Johnson', 'Hercules']
+        # pw = pw.split("/")
+        name = pw[2]
 
-    for user in data["users"]:
-        if pw[2] == data["users"][0]["name"]:
-            port = data["users"][0]["port"]
-            name = pw.split('.')
+    if local_ip in data:
+        if name in data[local_ip]:
+            port = data[local_ip][name]["port"]
+        else:
+            port = data[local_ip]["*"]["port"]
+    else:
+        port = data["*"]["port"]
 
 except FileNotFoundError:
     print("Error: File not found.")
     exit()
 
+name = name.split('.')[0]
+
 '''
+
 This class allows us to create http server and get a response from it
-BasrHTTPRequestHandler - used to handle the HHTP request that arrive at the server, 
+BaseHTTPRequestHandler - used to handle the HHTP request that arrive at the server, 
 which pre-opens sockets 
+
 '''
-
-
 class HTTPResponse(BaseHTTPRequestHandler):
 
     def do_GET(self):
@@ -43,24 +66,14 @@ class HTTPResponse(BaseHTTPRequestHandler):
         self.end_headers()
 
         self.wfile.write(
-            bytes(f"HELLO {name}, today is ".encode() + date.encode()))
+            bytes(f"Hello {name.capitalize()}, today is ".encode() + date.encode()))
 
 
-Server = HTTPServer((host, port), HTTPResponse)
+Server = HTTPServer((local_ip, port), HTTPResponse)
+print("IP Address: ", local_ip)
+print("Port: ", port)
+print("Name: ", name.capitalize())
 print("Serever now running")
 Server.serve_forever()
 Server.server_close()
 print("Server stop")
-
-'''
-os.walk Append dir to a list
-walking through home append names to list then make if statement
-
-if name is in list find that name in json 
-grab that name and port number for port and print 
-
-
-why is config in gitignore
-for each name
-
-'''
