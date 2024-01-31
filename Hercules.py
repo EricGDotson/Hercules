@@ -32,9 +32,8 @@ local_ip = get_local_ip()
 try:
     with open("config.json", "r") as f:
         data = json.load(f)
-        # pw = os.getcwd()
-        pw = ['C:', 'Users', 'ccarl.Johnson', 'Hercules']
-        # pw = pw.split("/")
+        pw = os.getcwd()
+        pw = pw.split("/")
         name = pw[2]
 
     if local_ip in data:
