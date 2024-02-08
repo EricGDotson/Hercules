@@ -1,0 +1,45 @@
+from cryptography.fernet import Fernet
+import os
+
+key = Fernet.generate_key()
+f = Fernet(key)
+
+with open('jsonkey.key', 'wb') as mykey:
+    mykey.write(key)
+
+with open('config.json', 'rb') as file:
+    original_json = file.read()
+
+encrypted_json = f.encrypt(original_json)
+
+with open('enc_json.json', 'wb') as encrypted_file:
+    encrypted_file.write(encrypted_json)
+
+
+with open('Hercules.key', 'wb') as mykey:
+    mykey.write(key)
+
+with open('Hercules.py', 'rb') as file:
+    original_hercules = file.read()
+
+encrypted_hercules = f.encrypt(original_hercules)
+
+with open('enc_hercules.py', 'wb') as encrypted_file:
+    encrypted_file.write(encrypted_hercules)
+
+
+decrypted_json = f.decrypt(encrypted_json)
+
+with open('dec_json.json', 'wb') as decrypted_file: 
+    decrypted_file.write(decrypted_json)
+
+
+decrypted_hercules = f.decrypt(encrypted_hercules)
+
+with open('dec_hercules.py', 'wb') as decrypted_file: 
+    decrypted_file.write(decrypted_hercules)
+
+# if 'enc_hercules.py' in os.listdir() and 'dec_hercules.py' in os.listdir():
+#     print('Encryption and decryption successful.')
+# else:
+#     print('Encryption or decryption failed.')

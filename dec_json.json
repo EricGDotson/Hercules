@@ -1,0 +1,45 @@
+{
+    "192.168.10.100": {
+        "eric.dotson": {
+            "port": 10001
+        },
+        "nate.klauer": {
+            "port": 10002
+        },
+        "evan.graves": {
+            "port": 10003
+        },
+        "fatinah.muhammad": {
+            "port": 10004
+        },
+        "josh.taylor": {
+            "port": 10005
+        },
+        "karl.zipser": {
+            "port": 10006
+        },
+        "regan.willis": {
+            "port": 10007
+        },
+        "ryan.jeon": {
+            "port": 10008
+        },
+        "tom.wise": {
+            "port": 10009
+        },
+        "*": {
+            "port": 10010
+        }
+    },
+    "192.168.10.70": {
+        "eric.dotson": {
+            "port": 10001
+        },
+        "ccarl.johnson": {
+            "port": 10002
+        }
+    },
+    "*": {
+        "port": 20002
+    }
+}
