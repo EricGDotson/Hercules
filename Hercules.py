@@ -7,11 +7,23 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 # TODO:
 # put config in gitignore?
 
-date = time.strftime("%m/%d/%Y")
+'''
+This class allows us to create http server and get a response from it
+BaseHTTPRequestHandler - used to handle the HHTP request that arrive at the server, 
+which pre-opens sockets 
+'''
+class HTTPResponse(BaseHTTPRequestHandler):
+
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
+        self.wfile.write(
+            bytes(f"Hello {name.capitalize()}, today is ".encode() + date.encode()))
+        
 
 # To grab local ip address
-
-
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
@@ -24,6 +36,7 @@ def get_local_ip():
         s.close()
     return IP
 
+date = time.strftime("%m/%d/%Y")
 
 local_ip = get_local_ip()
 
@@ -48,24 +61,6 @@ except FileNotFoundError:
     exit()
 
 name = name.split('.')[0]
-
-'''
-
-This class allows us to create http server and get a response from it
-BaseHTTPRequestHandler - used to handle the HHTP request that arrive at the server, 
-which pre-opens sockets 
-
-'''
-class HTTPResponse(BaseHTTPRequestHandler):
-
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-
-        self.wfile.write(
-            bytes(f"Hello {name.capitalize()}, today is ".encode() + date.encode()))
-
 
 Server = HTTPServer((local_ip, port), HTTPResponse)
 print("IP Address: ", local_ip)

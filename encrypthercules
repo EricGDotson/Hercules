@@ -4,6 +4,7 @@ import os
 key = Fernet.generate_key()
 f = Fernet(key)
 
+#Encrypt Json
 with open('jsonkey.key', 'wb') as mykey:
     mykey.write(key)
 
@@ -15,7 +16,7 @@ encrypted_json = f.encrypt(original_json)
 with open('enc_json.json', 'wb') as encrypted_file:
     encrypted_file.write(encrypted_json)
 
-
+#Encrypt Hercules
 with open('Hercules.key', 'wb') as mykey:
     mykey.write(key)
 
@@ -27,13 +28,13 @@ encrypted_hercules = f.encrypt(original_hercules)
 with open('enc_hercules.py', 'wb') as encrypted_file:
     encrypted_file.write(encrypted_hercules)
 
-
+#Decrypt Json
 decrypted_json = f.decrypt(encrypted_json)
 
 with open('dec_json.json', 'wb') as decrypted_file: 
     decrypted_file.write(decrypted_json)
 
-
+#Decrypt Hercules
 decrypted_hercules = f.decrypt(encrypted_hercules)
 
 with open('dec_hercules.py', 'wb') as decrypted_file: 
